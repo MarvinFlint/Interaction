@@ -128,3 +128,15 @@ class Circle{
         circle(this.x, this.y, this.cr);
     }
 }
+
+function windowResized(){
+    if(windowWidth < 800 && windowHeight < 800){
+        resizeCanvas(windowWidth, windowHeight);
+    }
+    else if(windowWidth < 800){
+        resizeCanvas(windowWidth, 800);
+    }
+    else if(windowHeight < 800){
+        resizeCanvas(800, windowWidth);
+    }
+}
