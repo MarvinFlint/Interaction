@@ -33,7 +33,7 @@ function mousePressed(){
         for(let i = 0; i < rectangles.length; i++){
             rectangles[i].currentRect = false;
         }
-        rectangles.push(new Rectangle(mouseX, mouseY, color(random(50), random(255), random(255)), 0, true))
+        rectangles.push(new Rectangle(mouseX, mouseY, color(random(255), random(255), random(255)), 0, true))
     }
     
 }
@@ -44,7 +44,7 @@ function keyPressed(){
     }
     let previousX = rectangles[rectangles.length - 1].x + rectangles[rectangles.length - 1].w;
     let previousY = rectangles[rectangles.length - 1].y;
-    rectangles.push(new Rectangle(previousX, previousY, color(random(50), random(255), random(255)), 0, true));
+    rectangles.push(new Rectangle(previousX, previousY, color(random(255), random(255), random(255)), 0, true));
 }
 
 function windowResized(){
