@@ -48,7 +48,7 @@ function keyPressed(){
 }
 
 function windowResized(){
-    if(windowWith < 800 && windowHeight < 800){
+    if(windowWidth < 800 && windowHeight < 800){
         resizeCanvas(windowWidth, windowHeight);
     }
     else if(windowWidth < 800){
