@@ -53,24 +53,37 @@ function mousePressed(){
 }
 
 function adjustTimer(e){
-    
-    if(e.deltaY < 0){
-        tSeconds++;
-        if(tSeconds > 59){
-        tMinutes++;
-        tSeconds = 0;
+    if(mouseX > 400){
+        if(e.deltaY < 0){
+            tSeconds++;
+            if(tSeconds > 59){
+            tMinutes++;
+            tSeconds = 0;
+            }
+        }
+        else{
+            tSeconds--;
+            if(tSeconds < 0 && tMinutes >= 1){
+                tMinutes--;
+                tSeconds = 59;
+            }
+            else if(tSeconds < 0){
+                tSeconds = 0;
+            }
         }
     }
     else{
-        tSeconds--;
-        if(tSeconds < 0 && tMinutes >= 1){
-            tMinutes--;
-            tSeconds = 59;
+        if(e.deltaY < 0){
+            tMinutes++;
         }
-        else if(tSeconds < 0){
-            tSeconds = 0;
+        else{
+            tMinutes--;
+            if(tMinutes <= 0){
+                tMinutes = 0;
+            }
         }
     }
+    
     
 }
 
