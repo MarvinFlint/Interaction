@@ -1,11 +1,14 @@
 var c1, c2;
-
+let stars = [];
 function setup() {
   cnv = createCanvas(800, 800);
   // Define colors
   c1 = color(10, 10, 70);
   c2 = color(255);
-  m1 = new Moon(30, 400, 50);
+  m1 = new Moon(30, 350, 50);
+  for(let i = 0; i < 60; i++){
+      stars[i] = new Star(random(0, 800), random(30, 450));
+  }
 }
 
 function draw() {
@@ -15,10 +18,15 @@ function draw() {
     for(let i = 0; i < 30; i++){
         stroke(0);
         line(i*f, 800, i*f, 770);
-        text(i + 1, i*f, 770);
+        text(i + 1, i*f + 5, 790);
     }
     fill("white");
-    text("<-- drag the moon -->", 300, 30)
+    text("<-- drag the moon -->", 300, 30);
+
+    // stars
+    for(let i = 0; i < stars.length; i++){
+        stars[i].drawStar();
+    }
 }
 function setGradient(c1, c2) {
   noFill();
@@ -62,5 +70,21 @@ class Moon{
         else if(this.x > 606){
             arc(this.x, this.y, this.r, this.r, map(this.x, 30, 770, 270, 630), map(this.x, 30, 770, 450, 90), CHORD);
         }
+    }
+}
+
+class Star{
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+        this.w = 3;
+        this.h = 10;
+    }
+    drawStar(){
+        ellipseMode(CENTER);
+        fill(255, 255, 0);
+        noStroke();
+        ellipse(this.x, this.y, this.w, this.h);
+        ellipse(this.x, this.y, this.h, this.w)
     }
 }

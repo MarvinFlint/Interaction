@@ -1,11 +1,13 @@
 let images = [];
 let cCursor = 0;
+
 function preload(){
-    
+
 }
 
 function setup(){
     cnv = createCanvas(800, 800);
+    
     images[0] = new dImage("img/1997.png", 1997);
     images[1] = new dImage("img/1998.png", 1998);
     images[2] = new dImage("img/1999.png", 1999);
