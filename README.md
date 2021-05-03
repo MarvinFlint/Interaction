@@ -25,24 +25,6 @@ p5.js Projects for one of my uni courses
 
 ## Feedback Session 1
 
-### Click
-- Affordance : minimal, nur Seitentitel
-- Visibility : nope
-- Feedback : klares feedback bei click
-- Constraints : wenig Fehlerpunkte
-- Mapping : not applicable
-- consistency : macht immer das gleiche
-
-### Drag
-
-- Affordance : no
-- Visibility : no
-- Feedback : klare reaktion, aber zu viel auf einmal
-- Mapping : nicht vorhanden
-- conistency : no
-
-### Rotate
-- Affordance : no. unklar welche zeiteinheit, wie man startet etc
-- Visibility : no
-- Feedback : klare reaktion
-- Mapping: intuitiv, aber nicht dargestellt
+### Cancel everything
+- Need to incorporate the time aspect more, basically needs a redesign
+- Do sketches first, programm later

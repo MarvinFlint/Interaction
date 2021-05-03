@@ -1,111 +1,51 @@
-let timer;
-let tMinutes = 0;
-let tSeconds = 0;
-
-let countDownTimer = false;
-
+let images = [];
+let cCursor = 0;
 function preload(){
-
+    
 }
 
 function setup(){
     cnv = createCanvas(800, 800);
-    cnv.mouseWheel(adjustTimer);
-    textSize(80);
-    
+    images[0] = new dImage("img/1997.png", 1997);
+    images[1] = new dImage("img/1998.png", 1998);
+    images[2] = new dImage("img/1999.png", 1999);
+    images[3] = new dImage("img/2010.png", 2010);
+    images[4] = new dImage("img/2015.png", 2015);
+    cnv.mouseWheel(scrollImages);
 }
 
 function draw(){
-    background("#f0f0f0");
+    background(255);
+    image(images[round(cCursor/10)].imgPath, 150, 250);
     fill(0);
-    textAlign(RIGHT);
-    if(tMinutes < 10){
-        text("0" + tMinutes, 350, 350);
-    }
-    else{
-        text(tMinutes, 350, 350);
-    }
-    textAlign(LEFT);
-    text(":", 355, 345);
-    if(tSeconds < 10){
-        text("0" + tSeconds, 380, 350);
-    }
-    else{
-        text(tSeconds, 380, 350);
-    }
-    
-    if(countDownTimer){
-        countDownT();
-        frameRate(1);
-    }
-    else{
-        frameRate(60);
-    }
-
-    if(tSeconds == 0 && tMinutes == 0 && countDownTimer){
-        fill(255, 100, 100);
-        text("BOOM", 350, 700);
-    }
+    textSize(30);
+    text(images[round(cCursor/10)].imgYear, 600, 330);
+   
+    // loading bar
+    noFill();
+    stroke(0);
+    rect(200, 450, 300, 30);
+    noStroke();
+    fill(255, 0, 0);
+    rect(200, 450, map(cCursor, 0, 40, 0, 300), 30);
 }
 
-function mousePressed(){
-    countDownTimer = !countDownTimer;
+function scrollImages(e){
+    console.log(cCursor);
+    if(e.deltaY < 0 && cCursor < 40){
+            cCursor++;
+        
+    }
+    else if(e.deltaY > 0 && cCursor > 0){
+            cCursor--;
+        
+    }
+    console.log(cCursor);
 }
 
-function adjustTimer(e){
-    if(mouseX > 400){
-        if(e.deltaY < 0){
-            tSeconds++;
-            if(tSeconds > 59){
-            tMinutes++;
-            tSeconds = 0;
-            }
-        }
-        else{
-            tSeconds--;
-            if(tSeconds < 0 && tMinutes >= 1){
-                tMinutes--;
-                tSeconds = 59;
-            }
-            else if(tSeconds < 0){
-                tSeconds = 0;
-            }
-        }
-    }
-    else{
-        if(e.deltaY < 0){
-            tMinutes++;
-        }
-        else{
-            tMinutes--;
-            if(tMinutes <= 0){
-                tMinutes = 0;
-            }
-        }
-    }
-    
-    
-}
-
-function countDownT(){
-    tSeconds--;
-    if(tSeconds < 0 && tMinutes >= 1){
-        tMinutes--;
-        tSeconds = 59;
-    }
-    else if(tSeconds < 0){
-        tSeconds = 0;
-    }
-}
-
-function windowResized(){
-    if(windowWidth < 800 && windowHeight < 800){
-        resizeCanvas(windowWidth, windowHeight);
-    }
-    else if(windowWidth < 800){
-        resizeCanvas(windowWidth, 800);
-    }
-    else if(windowHeight < 800){
-        resizeCanvas(800, windowWidth);
+class dImage{
+    constructor(imgPath, imgYear){
+        this.imgPath = loadImage(imgPath);
+        this.imgYear = imgYear;
     }
 }
