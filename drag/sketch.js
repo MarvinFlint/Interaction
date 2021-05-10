@@ -2,6 +2,7 @@ var c1, c2;
 let stars = [];
 let moonImg;
 let started = false;
+let c;
 function preload(){
     moonImg = loadImage("moon.png");
 }
@@ -26,11 +27,15 @@ function draw() {
     m1.print();
     fill("white");
     if(!started){
-        text("<--      -->", windowWidth / 2 * 0.92, windowHeight / 2 * 1.2);
+        textAlign(CENTER, CENTER)
+        textSize(32);
+        text("<--              -->", m1.x, m1.y);
     }
     stroke(255);
     if(started){
         line(0, windowHeight / 2, windowWidth, windowHeight / 2);
+        text("Northern Hemisphere", windowWidth / 2, windowHeight / 2 - 50);
+        text("Southern Hemisphere", windowWidth / 2, windowHeight / 2 + 50);
     }
     
     
@@ -93,12 +98,12 @@ class Moon{
     }
     print(){
         fill("white");
+        textSize(16);
         text(round(map(this.x, this.r / 2, windowWidth - this.r / 2, 1, 30)), this.x + cos(map(this.x, 0, windowWidth, 0, 180)) * 50, this.y - this.r);
         noStroke();
-        let c = color(0, 0, 0, 0.2);
-        fill(c);
         image(moonImg, this.x - this.r/2, this.y - this.r/2, this.r, this.r);
-        fill(0);
+        c = color('rgba(0, 0, 0, 0.7)');
+        fill(c);
         angleMode(DEGREES)  
         if(this.y > windowHeight / 2){
             if(this.x <= 222){
