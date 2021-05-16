@@ -43,9 +43,15 @@ function draw() {
 }
 function setGradient(c1, c2) {
   noFill();
-  for (var y = 0; y < height; y++) {
-    var inter = map(y, 0, height, 0, 1);
-    var c = lerpColor(c1, c2, inter);
+  for (let y = 0; y < height / 2; y++) {
+    let inter = map(y, 0, height, 0, 1);
+    let c = lerpColor(c1, c2, inter);
+    stroke(c);
+    line(0, y, width, y);
+  }
+  for(let y = height / 2; y < height; y++){
+    let inter = map(y, height / 2, height, 0, 1);
+    let c = lerpColor(c1, c2, inter);
     stroke(c);
     line(0, y, width, y);
   }
@@ -151,7 +157,7 @@ class Star{
         rotate(this.rotation);
         ellipse(0, 0, this.w, this.h);
         ellipse(0, 0, this.h, this.w);
-        this.rotation += 10;
+        this.rotation += random(0.1, 0.8);
         pop();
     }
 }
