@@ -10,7 +10,7 @@ p5.js Projects for one of my uni courses
 - HSA Documentation
 - responsiveness for small screens
 
-### Click
+### Clickmoon_old
 - left and rightclick should have different interactions
 - Color selection should be pseudo-random
 - pause functionality

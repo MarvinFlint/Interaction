@@ -12,6 +12,13 @@ nav{
     position: fixed;
     bottom: 0;
     left: 0;
+    height: 5px;
+    transition: all 1s ease-in-out;
+}
+
+nav:hover{
+    transition: all 1s ease-in-out;
+    height: auto;
 }
 
 nav ul{
