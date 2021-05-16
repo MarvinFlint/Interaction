@@ -12,7 +12,7 @@ function setup() {
   // Define colors
   c1 = color(10, 10, 80);
   c2 = color(0, 40, 150);
-  m1 = new Moon(windowWidth/2 -30, windowHeight/2, 100);
+  m1 = new Moon(windowWidth/2 -30, windowHeight/4, 100);
   for(let i = 0; i < 90; i++){
       stars[i] = new Star(random(0, windowWidth), random(30, windowHeight));
   }
@@ -29,15 +29,14 @@ function draw() {
     if(!started){
         textAlign(CENTER, CENTER)
         textSize(32);
-        text("<--              -->", m1.x, m1.y);
+        text("<--     -->", m1.x, m1.y + m1.r);
     }
     stroke(255);
-    if(started){
-        line(0, windowHeight / 2, windowWidth, windowHeight / 2);
-        textSize(25);
-        text("Northern Hemisphere", windowWidth / 2, windowHeight / 2 - 50);
-        text("Southern Hemisphere", windowWidth / 2, windowHeight / 2 + 50);
-    }
+    line(0, windowHeight / 2, windowWidth, windowHeight / 2);
+    textSize(25);
+    text("Northern Hemisphere", windowWidth / 2, windowHeight / 2 - 50);
+    text("Southern Hemisphere", windowWidth / 2, windowHeight / 2 + 50);
+    
     
     
 }
