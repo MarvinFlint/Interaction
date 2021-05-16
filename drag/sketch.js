@@ -10,10 +10,10 @@ function preload(){
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight);
   // Define colors
-  c1 = color(10, 10, 70);
-  c2 = color(10, 10, 150);
-  m1 = new Moon(windowWidth/2, windowHeight/2, 100);
-  for(let i = 0; i < 60; i++){
+  c1 = color(10, 10, 80);
+  c2 = color(0, 40, 150);
+  m1 = new Moon(windowWidth/2 -30, windowHeight/2, 100);
+  for(let i = 0; i < 90; i++){
       stars[i] = new Star(random(0, windowWidth), random(30, windowHeight));
   }
 }
@@ -34,8 +34,9 @@ function draw() {
     stroke(255);
     if(started){
         line(0, windowHeight / 2, windowWidth, windowHeight / 2);
-        text("Northern Hemisphere", windowWidth / 2, windowHeight / 2 - 50);
-        text("Southern Hemisphere", windowWidth / 2, windowHeight / 2 + 50);
+        textSize(25);
+        text("Northern Hemisphere", windowWidth / 2, 50);
+        text("Southern Hemisphere", windowWidth / 2, windowHeight - 50);
     }
     
     
@@ -79,7 +80,6 @@ function mouseClicked(e){
         m1.x = windowWidth - m1.r / 2;
     }
     console.log(m1);
-    console.log('Coords: ' + map(m1.x, 30, windowWidth, 270, 630) + " " + map(m1.x, 30, windowWidth, 450, 90));
 }
 
 function windowResized() {
@@ -87,9 +87,11 @@ function windowResized() {
     for(let i = 0; i < 60; i++){
         stars[i] = new Star(random(0, windowWidth), random(30, windowHeight));
     }
-    console.log(windowWidth);
 }
 
+function keyPressed(){
+    console.log(m1.x, map(m1.x, m1.r / 2, windowWidth - m1.r / 2, 450, 90), map(m1.x, m1.r / 2, windowWidth - m1.r / 2, 270, 630));
+}
 class Moon{
     constructor(x, y, r){
         this.x = x;
@@ -105,26 +107,28 @@ class Moon{
         c = color('rgba(0, 0, 0, 0.7)');
         fill(c);
         angleMode(DEGREES)  
+        // southern hemisphere
         if(this.y > windowHeight / 2){
-            if(this.x <= 222){
-                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 270, 630), map(this.x, 30, windowWidth, 450, 90), CHORD);
+            if(this.x <= windowWidth / 4 + this.r){
+                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 450, 90), map(this.x, this.r / 2, windowWidth - this.r / 2, 270, 630), CHORD);
             }
-            else if(this.x > 222 && this.x <= 606){
-                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 630, 270), map(this.x, 30, windowWidth, 90, 450), CHORD);
+            if(this.x >= windowWidth / 4 - this.r && this.x <= windowWidth * 0.75 - this.r){
+                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 90, 450), map(this.x, this.r / 2, windowWidth - this.r / 2, 630, 270), CHORD);
             }
-            else if(this.x > 606){
-                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 270, 630), map(this.x, 30, windowWidth, 450, 90), CHORD);
+            if(this.x >= windowWidth * 0.75){
+                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 450, 90), map(this.x, this.r / 2, windowWidth - this.r / 2, 270, 630), CHORD);
             }
         }
+        // northern hemisphere
         else{
-            if(this.x <= 222){
-                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 630, 270), map(this.x, 30, windowWidth, 90, 450), CHORD);
+            if(this.x <= windowWidth / 4 + this.r){
+                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 630, 270), map(this.x, this.r / 2, windowWidth - this.r / 2, 90, 450), CHORD);
             }
-            else if(this.x > 222 && this.x <= 606){
-                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 270, 630), map(this.x, 30, windowWidth, 450, 90), CHORD);
+            if(this.x > windowWidth / 4 - this.r && this.x < windowWidth * 0.75 - this.r){
+                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 270, 630), map(this.x, this.r / 2, windowWidth - this.r / 2, 450, 90), CHORD);
             }
-            else if(this.x > 606){
-                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 630, 270), map(this.x, 30, windowWidth, 90, 450), CHORD);
+            if(this.x > windowWidth * 0.75){
+                arc(this.x, this.y, this.r, this.r, map(this.x, this.r / 2, windowWidth - this.r / 2, 630, 270), map(this.x, this.r / 2, windowWidth - this.r / 2, 90, 450), CHORD);
             }
         }
     }
@@ -136,12 +140,18 @@ class Star{
         this.y = y;
         this.w = 3;
         this.h = 10;
+        this.rotation = random(0, 360);
     }
     drawStar(){
+        push();
         ellipseMode(CENTER);
         fill(255, 255, 0);
         noStroke();
-        ellipse(this.x, this.y, this.w, this.h);
-        ellipse(this.x, this.y, this.h, this.w)
+        translate(this.x, this.y);
+        rotate(this.rotation);
+        ellipse(0, 0, this.w, this.h);
+        ellipse(0, 0, this.h, this.w);
+        this.rotation += 10;
+        pop();
     }
 }

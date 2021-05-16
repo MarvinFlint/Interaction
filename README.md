@@ -9,8 +9,8 @@ p5.js Projects for one of my uni courses
 - Description for functionality
 - HSA Documentation
 - responsiveness for small screens
-### Click
 
+### Click
 - left and rightclick should have different interactions
 - Color selection should be pseudo-random
 - pause functionality
@@ -41,5 +41,8 @@ p5.js Projects for one of my uni courses
 - Responsiveness - easy tbh ✓
 
 ## New Problems
-- the shade ain't workin as it is supposed to - needs fixing
 - unclear what the two spheres are
+- Moon either more comic-like or background more space-like
+- blue with less saturation
+- n/s text position
+- maybe complete change
