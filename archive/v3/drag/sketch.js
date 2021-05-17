@@ -13,9 +13,12 @@ function setup() {
   c1 = color(10, 10, 80);
   c2 = color(0, 40, 150);
   m1 = new Moon(windowWidth/2 -30, windowHeight/4, 100);
-  for(let i = 0; i < 90; i++){
-      stars[i] = new Star(random(0, windowWidth), random(30, windowHeight));
+  for(let i = 0; i < 45; i++){
+      stars[i] = new Star(random(0, windowWidth), random(30, windowHeight / 2 - 10));
   }
+  for(let i = 45; i < 90; i++){
+    stars[i] = new Star(random(0, windowWidth), random(windowHeight / 2 + 10, windowHeight));
+}
 }
 
 function draw() {
